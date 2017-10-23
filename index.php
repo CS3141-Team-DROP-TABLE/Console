@@ -1,33 +1,54 @@
 <html>
-<title>Network Health Monitor</title>
-</html>
+	<head>
+		<title>Network Health Monitor</title>
+	</head>
+	<body>
+	
+		<!--table set up-->
+		<table border = "1">
+        <thead>
+            <tr>
+                <th>Target</th>
+                <th>Ping</th>
+            </tr>
+        </thead>
+        <tbody>
 
 
-<?php
-try { 
-	$dbh = new PDO('cs3141.chqohuzhefwm.us-east-1.rds.amazonaws.com;dbname=NetworkHealthMonitor',"web","Netw0rkH3alth");
+	<?php
 
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		//connecting to the database
+		$dsn = 'mysql:dbname=NetworkHealthMonitor;host=cs3141.chqohuzhefwm.us-east-1.rds.amazonaws.com';
+		$user = 'web';
+		$password = 'Netw0rkH3alth';
+		try { 
+			$dbh = new PDO($dsn,$user,$password);
+
+			$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
-    echo "table border='1'";
-    echo "<TR>";
-    echo "<TH> Target </TH>";
-    echo "<TH> Ping </TH>";
-    echo "</TR>";
-
-    foreach ($dbh->query("SELECT ip, ping FROM watches") as $row) {
-    	echo "<TR>";
-	echo "<TD>".$row[0]."</TD>";
-	echo "<TD>".$row[1]."</TD>";   
-    }
-}
+			
+			//db query for the ping and ip of a target
+			foreach ($dbh->query("SELECT ip, ping FROM watches") as $row) {
+			
+				echo "<TD>$row[0]</TD>";
+				echo "<TD>$row[1]</TD>";   
+			}
+		}
     
 
 
-catch (PDOException $e) {
-      print "error!".$e->getMessage()."<br/>";
-      die();
+		//error handling
+		catch (PDOException $e) {
+			print "error!$e->getMessage()<br/>";
+			die();
 
-}
-?>
+		}
+
+		error_reporting(E_ALL);
+		ini_set('display_errors','on');
+		?>
+		</tbody>
+		</table>
+	</body>
+</html>
