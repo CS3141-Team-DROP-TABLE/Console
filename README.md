@@ -1,8 +1,9 @@
 # Console
 A web console for managing monitors and servers
 
-#address
+# location
 tsp.bilderback.me
 
-#functionality timeline
-Query database and display in a table
+# functionality updates
+10/23/2017: Query database and display in a table
+
