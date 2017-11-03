@@ -1,0 +1,24 @@
+<?php
+session_start();
+?>
+<html>
+<head>Add a New Target</head>
+<title>Network Health Monitor</title>
+
+<body>
+	<h4>please enter the name and IP address of the target</h4>
+	<form action = "addTargetResult.php" method = "post">
+		<table>
+			<tr>
+				<td>Name:</td><td><input type = "text" name = "networkName" autofocus></td>
+			</tr>
+			<tr>
+				<td>Address:</td><td><input type = "text" name = "address"></td>
+			</tr>
+			<tr>
+				<td></td><td><input class = "submit" name = "add" type = "submit" value = "Add Target"></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

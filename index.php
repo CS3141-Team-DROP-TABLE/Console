@@ -1,54 +1,38 @@
+<?php
+	if (isset($_POST['submit'])){
+	 	session_start();
+	 	$username = $_POST['username'];
+	 	$_SESSION['username'] = $username;
+	 	$_SESSION['password'] = $_POST['password'];
+		header("Location: homepage.php");
+	 	die();
+	 }
+	 if (isset($_POST['signup'])) {
+		header("Location: signup.html");
+	}
+	 
+?>
+
 <html>
-	<head>
-		<title>Network Health Monitor</title>
-	</head>
-	<body>
-	
-		<!--table set up-->
-		<table border = "1">
-        <thead>
-            <tr>
-                <th>Target</th>
-                <th>Ping</th>
-            </tr>
-        </thead>
-        <tbody>
+<head>Welcome to the Network Health Monitor</head>
+<title>Network Health Monitor</title>
 
-
-	<?php
-
-		//connecting to the database
-		$dsn = 'mysql:dbname=NetworkHealthMonitor;host=cs3141.chqohuzhefwm.us-east-1.rds.amazonaws.com';
-		$user = 'web';
-		$password = 'Netw0rkH3alth';
-		try { 
-			$dbh = new PDO($dsn,$user,$password);
-
-			$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-
-			
-			//db query for the ping and ip of a target
-			foreach ($dbh->query("SELECT ip, ping FROM watches") as $row) {
-			
-				echo "<TD>$row[0]</TD>";
-				echo "<TD>$row[1]</TD>";   
-			}
-		}
-    
-
-
-		//error handling
-		catch (PDOException $e) {
-			print "error!$e->getMessage()<br/>";
-			die();
-
-		}
-
-		error_reporting(E_ALL);
-		ini_set('display_errors','on');
-		?>
-		</tbody>
+<body>
+	<h4>Please enter your username and password</h4>
+	<form action="index.php" method = "post">
+		<table>
+			<tr>
+				<td>Username:</td><td><input type = "text" name = "username" autofocus></td>
+			</tr>
+			<tr>
+				<td>Password:</td><td><input type = "password" name = "password"></td>
+			</tr>
+			<tr>
+				<td></td><td><input class = "submit" name = "submit" type = "submit" value = "Login"></td>
+			</tr>
+			<tr>
+				<td></td><td><input class="submit" name="signup" type="submit" value="Sign Up"></td>
+			</tr>
 		</table>
-	</body>
-</html>
+	</form>
+</body>
