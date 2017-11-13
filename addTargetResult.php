@@ -12,10 +12,9 @@ $name = $_POST['networkName'];
 $address = $_POST['address'];
 
 $targetInsert = "INSERT INTO target VALUES('$address','$name')";
-$watchInsert = "INSERT INTO watches VALUES('$username','$address','$name')";
+$watchInsert = "INSERT INTO watches VALUES('$username','$address','$name', 'ACTIVE')";
 $statInsert = "INSERT INTO stats VALUES('$address',NOW(),'00:00:00',24)";
-//$targetSelect = "SELECT ip FROM target where ip = '$address'";
-//$watchesSelect = "SELECT ip from watches where ip = '$address' and username = '$username'";
+$watchesSelect = "SELECT ip from watches where ip = '$address' and username = '$username'";
 
 
 
@@ -25,19 +24,23 @@ try {
 
 	$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	
-	/* $targetSelect = $dbh->query("SELECT ip FROM target where ip = '$address'");
+	$dbh->query("use NetworkHealthMonitor");
+	
+	$targetSelect = $dbh->query("SELECT ip FROM target where ip = '$address'");
 	$targetSelect = $targetSelect->fetch(PDO::FETCH_ASSOC);
-	$selectResult = targetSelect['ip'];
-	if ($selectResult == NULL) {
-	} */
-	//else {
+	if ($targetSelect['ip'] == NULL) {
 		$dbh->exec($targetInsert);
-	//}  
+		$dbh->exec($statInsert);
+	} 
 	
 	$watchesSelect = $dbh->query("SELECT ip from watches where ip = '$address' and username = '$username'");
 	$watchesSelect = $watchesSelect->fetch(PDO::FETCH_ASSOC);
-	$watchesResult = watchesSelect['ip']; 
-	if ($watchesResult == $address) {
+	//$watchesResult = watchesSelect['ip'];
+	print $username;
+	print $address;
+	print $name;
+	//print $targetSelect['ip']; 
+	if ($watchesSelect['ip'] == $address) {
 		echo 'Target already added!';
 		echo '<form action = "homepage.php" method = "post">';
 		echo	'<input class="submit" name="myMonitors" type="submit" value="My Monitors">';
@@ -45,7 +48,6 @@ try {
 	}
 	else {
 		$dbh->exec($watchInsert);
-		$dbh->exec($statInsert);
 		echo 'Target Successfully Added';
 		echo '<form action = "homepage.php" method = "post">';
 		echo	'<input class="submit" name="myMonitors" type="submit" value="My Monitors">';
