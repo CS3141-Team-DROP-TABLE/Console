@@ -1,0 +1,56 @@
+<html>
+<title>Network Health Monitor</title>
+<head>
+	<link type="text/css" rel="stylesheet" href="css/stylesheet.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+	
+		body {
+			
+			margin: 5vw 0 0 0;
+			
+		}
+		
+		@media screen and (min-width: 810px){
+			
+			form {
+				margin: 0 auto 0 auto;
+				width: 25vw;
+			}
+			
+		}
+		@media screen and (min-width: 540px) and (max-width: 810px){
+			
+			form {
+				margin: 0 auto 0 auto;
+				width: 38vw;
+			}
+			
+		}
+		
+		@media screen and (max-width: 540px){
+			
+			form{
+				
+				margin: 0;
+				width: 100%
+				
+			}
+			
+		}
+	</style>
+</head>
+<body>
+	
+	<form action = "signupResult.php" method = "post">
+		<label for = "uName">Username</label>
+		<input type = "text" name = "username" id = "uName" autofocus>
+		<label for = "pWord">Password</label>
+		<input type = "password" name = "password" id = "pWord">
+		<label for = "cPWord">Confirm Password</label>
+		<input type = "password" name = "confirm_password" id = "cPWord">
+		<input class = "submit" name = "signedUp" type = "submit" value = "Sign Up">
+	</form>
+		<a href="index.php" class = "back">Back</a>
+</body>
+</html>

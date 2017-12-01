@@ -1,0 +1,52 @@
+<?php
+session_start();
+?>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Network Health Monitor</title>
+	<link rel="stylesheet" href="css/stylesheet.css">
+	<style>
+		form {
+		
+		margin: 0;
+		width: 100%;
+		
+		}
+		body {
+		
+		text-align: left;
+		
+		}
+	</style>
+</head>
+
+<body>
+	
+	<form action = "addTargetResult.php" method = "post">
+	
+	<!--Header-->
+	<div class = "monHeader">
+		<div class = "logoDiv">
+			<img src="visuals/logo.png" alt="UpBot" style="width:100px;height:100px">
+		</div>
+		<div class = "linksDiv">
+			<table id = "headerTable">
+				<td>
+					<input class = "submit" name = "add" type = "submit" value = "Add">
+				</td>
+				<td>
+					<a href="homepage.php" class = "back">Back</a>
+				</td>
+			</table>
+		</div>
+	</div>
+	<!--------------------->
+		<label for="nName">Name of Network</label>
+		<input type = "text" id="nName" name = "networkName" autofocus placeholder = "Network name...">
+		<label for="nIP">IP address</label>
+		<input type = "text" id="nIP" name = "address" placeholder = "IP address of network"></td>
+		</form>
+	</form>
+</body>
+</html>
